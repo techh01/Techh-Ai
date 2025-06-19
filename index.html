@@ -1,0 +1,110 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TECHH AI - E-commerce Assistant</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .typing::after {
+      content: '|';
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body class="bg-white text-black font-sans">
+  <div class="max-w-5xl mx-auto p-6">
+    <header class="mb-8 text-center">
+      <h1 class="text-4xl font-bold">TECHH <span class="text-green-600">AI Assistant</span></h1>
+      <p class="text-gray-500 mt-2">Your Smart E-commerce & Dropshipping Guide</p>
+    </header><section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <!-- Topic buttons -->
+  <div>
+    <h2 class="text-xl font-semibold mb-4">Main Topics</h2>
+    <div id="topics" class="space-y-4"></div>
+  </div>
+
+  <!-- Subtopics -->
+  <div>
+    <h2 class="text-xl font-semibold mb-4">Subtopics</h2>
+    <div id="subtopics" class="space-y-4"></div>
+  </div>
+
+  <!-- Chat output -->
+  <div>
+    <h2 class="text-xl font-semibold mb-4">TECHH AI Says</h2>
+    <div id="responseArea" class="bg-gray-100 p-4 rounded shadow text-sm h-80 overflow-y-auto whitespace-pre-wrap text-gray-800"></div>
+  </div>
+</section>
+
+  </div>  <script>
+    const topics = {
+      "About TECHH": {
+        "Who is the founder of TECHH?": "David James, a passionate entrepreneur with expertise in e-commerce and tech solutions.",
+        "What is TECHH about?": "TECHH is a tech-focused e-commerce support agency that helps brands build, launch, and scale online stores.",
+        "Have they helped clients in the past?": "Yes, TECHH has worked with several brands with a 90%+ satisfaction rate.",
+        "What is your pricing structure?": "Simple - $50, Basic - $150, Silver - $300, Premium - $500.",
+        "What do I get with each package?": "Simple: 1 product, Basic: 3-5, Silver: 10+SEO, Premium: Full brand, 7-day support."
+      },
+      "What is Dropshipping?": {
+        "How does dropshipping work?": "You sell, your supplier ships. No inventory. You profit the difference.",
+        "What are the benefits?": "Low risk, low cost, flexible, scalable.",
+        "Are there any downsides?": "Slower shipping, lower margins, quality issues.",
+        "Is dropshipping profitable in 2025?": "Yes. Niche stores + TikTok + fast suppliers = big potential.",
+        "Where do I find winning products?": "Use tools like Minea, Ecomhunt, and track TikTok trends."
+      },
+      "Suppliers & Fulfillment": {
+        "How do I find suppliers?": "Use AliExpress, CJdropshipping, Zendrop, or Spocket.",
+        "How do I know if a supplier is reliable?": "Reviews, fast response time, sample testing.",
+        "Can I automate order fulfillment?": "Yes -- tools like DSers and AutoDS help.",
+        "What shipping options can I offer?": "ePacket, CJPacket, YunExpress, DHL.",
+        "What if a supplier runs out of stock?": "Use backups and apps with alerts."
+      },
+      "Customer Support & Returns": {
+        "How should I handle customer questions?": "Use FAQs, chatbots, and respond within 24h.",
+        "What's a good return policy?": "14-day returns, unopened items, simple instructions.",
+        "How do I deal with angry customers?": "Be calm, provide solutions, refund if needed.",
+        "Do I need customer support software?": "Try Zendesk or Gorgias integrated with Shopify.",
+        "Should I handle support myself?": "Yes, at first. Outsource later to a trained VA."
+      },
+      "Marketing & Scaling": {
+        "How do I get traffic to my store?": "Run Facebook/TikTok ads, use influencers, SEO.",
+        "What marketing strategies actually work?": "UGC, video ads, urgency timers, email flows.",
+        "How do I increase conversion rate?": "Fast store, reviews, mobile optimization.",
+        "How do I scale a winning product?": "Test ads, scale budget, expand targeting.",
+        "When should I consider private labeling?": "After 500+ orders with same product."
+      }
+    };
+
+    const topicsDiv = document.getElementById('topics');
+    const subtopicsDiv = document.getElementById('subtopics');
+    const responseArea = document.getElementById('responseArea');
+
+    function createButton(label, onClickFn) {
+      const btn = document.createElement('button');
+      btn.textContent = label;
+      btn.className = 'w-full bg-black text-white py-2 px-4 rounded hover:bg-gray-900 transition';
+      btn.onclick = onClickFn;
+      return btn;
+    }
+
+    Object.keys(topics).forEach(topic => {
+      topicsDiv.appendChild(createButton(topic, () => {
+        subtopicsDiv.innerHTML = '';
+        responseArea.textContent = '';
+        Object.keys(topics[topic]).forEach(sub => {
+          subtopicsDiv.appendChild(createButton(sub, () => {
+            responseArea.innerHTML = '<span class="typing">Typing...</span>';
+            setTimeout(() => {
+              responseArea.textContent = topics[topic][sub];
+            }, 800);
+          }));
+        });
+      }));
+    });
+  </script></body>
+</html>
